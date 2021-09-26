@@ -11,6 +11,7 @@ function setup() {
     //! Getting DOM objects (HTML elements)
     let grassCountElement = document.getElementById('grassCount');
     let grassEaterCountElement = document.getElementById('grassEaterCount');
+    let grassEaterEaterCountElement = document.getElementById('grassEaterEaterCount');
 
     //! adding socket listener on "data" <-- name, after that fire 'drawCreatures' function 
 
@@ -20,6 +21,8 @@ function setup() {
         //! after getting data pass it to matrix variable
         matrix = data.matrix;
         grassCountElement.innerText = data.grassCounter;
+        grassEaterCountElement.innerText = data.grassEaterCounter;  
+        grassEaterEaterCountElement.innerText = data.grassEaterEaterCounter;  
         //! Every time it creates new Canvas woth new matrix size
         createCanvas(matrix[0].length * side, matrix.length * side)
         //! clearing background by setting it to new grey color
@@ -31,23 +34,19 @@ function setup() {
             for (var j = 0; j < matrix[i].length; j++) {
                 if (matrix[i][j] == 1) {
                     fill("green");
-                    rect(j * side, i * side, side, side);
                 } else if (matrix[i][j] == 2) {
                     fill("orange");
-                    rect(j * side, i * side, side, side);
                 } else if (matrix[i][j] == 0) {
                     fill('#acacac');
-                    rect(j * side, i * side, side, side);
                 } else if (matrix[i][j] == 3) {
                     fill('red');
                     rect(j * side, i * side, side, side);
                 } else if (matrix[i][j] == 4) {
                     fill('blue');
-                    rect(j * side, i * side, side, side);
                 } else if (matrix[i][j] == 5) {
                     fill('yellow');
-                    rect(j * side, i * side, side, side);
                 }
+                rect(j * side, i * side, side, side);
             }
         }
     }

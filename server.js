@@ -2,6 +2,8 @@
 //! Requiring modules  --  START
 var Grass = require("./modules/Grass.js");
 var GrassEater = require("./modules/GrassEater.js");
+var GrassEaterEater = require("./modules/GrassEaterEater.js");
+var Fire = require("./modules/Fire.js");
 let random = require('./modules/random');
 //! Requiring modules  --  END
 
@@ -9,8 +11,9 @@ let random = require('./modules/random');
 //! Setting global arrays  --  START
 grassArr = [];
 grassEaterArr = [];
+grassEaterEaterArr = [];
+fireArr = [];
 matrix = [];
-grassHashiv = 0;
 //! Setting global arrays  -- END
 
 
@@ -50,7 +53,7 @@ function matrixGenerator(matrixSize, grass, grassEater, grassEaterEater, waterAr
         matrix[customY][customX] = 5;
     }
 }
-matrixGenerator(20, 1, 1);
+matrixGenerator(20, 3, 5, 5, 0, 10);
 //! Creating MATRIX -- END
 
 
@@ -78,7 +81,12 @@ function creatingObjects() {
             } else if (matrix[y][x] == 1) {
                 var grass = new Grass(x, y);
                 grassArr.push(grass);
-                grassHashiv++;
+            } else if (matrix[y][x] == 3){
+                var grassEaterEater = new GrassEaterEater(x, y);
+                grassEaterEaterArr.push(grassEaterEater)
+            } else if (matrix[y][x] == 5){
+                var fire = new Fire(x, y);
+                fireArr.push(fire)
             }
         }
     }
@@ -96,11 +104,24 @@ function game() {
             grassEaterArr[i].eat();
         }
     }
+    if (grassEaterEaterArr[0] !== undefined) {
+        for (var i in grassEaterEaterArr) {
+            grassEaterEaterArr[i].eat();
+        }
+    }
+
+    if (fireArr[0] !== undefined) {
+        for (var i in fireArr) {
+            fireArr[i].spread();
+        }
+    }
 
     //! Object to send
     let sendData = {
         matrix: matrix,
-        grassCounter: grassHashiv
+        grassCounter: grassArr.length,
+        grassEaterCounter: grassEaterArr.length,
+        grassEaterEaterCounter: grassEaterEaterArr.length
     }
 
     //! Send data over the socket to clients who listens "data"
