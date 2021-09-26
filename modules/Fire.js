@@ -25,13 +25,11 @@ module.exports = class Fire extends LiveForm {
     }
     spread() {
         this.multiply++;
-        let emptyCells1 = this.chooseCell(1);
-        let emptyCells2 = this.chooseCell(2);
-        let emptyCells3 = this.chooseCell(3);
-        let emptyCells = random([emptyCells1, emptyCells2, emptyCells3])
+        let target = random([1, 2, 3])
+        let emptyCells = this.chooseCell(target)
         let newCell = random(emptyCells);
 
-        if (this.multiply >= 5) {
+        if (this.multiply >= 8) {
             if (newCell){
                 let x = newCell[0];
                 let y = newCell[1];
@@ -39,7 +37,29 @@ module.exports = class Fire extends LiveForm {
                 let fire = new Fire(x, y);
                 fireArr.push(fire);
                 this.multiply = 0;
-            } else if(emptyCells1.length == 0 && emptyCells2.length == 0 && emptyCells3.length == 0) {
+
+                if(target == 1){
+                    for (let i in grassArr) {
+                        if (grassArr[i].x == x && grassArr[i].y == y) {
+                            grassArr.splice(i, 1)
+                        }
+                    }
+                } else if(target == 2){
+                    for (let i in grassEaterArr) {
+                        if (grassEaterArr[i].x == x && grassEaterArr[i].y == y) {
+                            grassEaterArr.splice(i, 1)
+                        }
+                    }
+                } else if(target == 3){
+                    for (let i in grassEaterEaterArr) {
+                        if (grassEaterEaterArr[i].x == x && grassEaterEaterArr[i].y == y) {
+                            grassEaterEaterArr.splice(i, 1)
+                        }
+                    }
+                }
+
+
+            } else {
                 this.die()
             }
         }

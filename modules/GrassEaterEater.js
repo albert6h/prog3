@@ -23,7 +23,7 @@ module.exports = class GrassEaterEater extends LiveForm {
     chooseCell(character) {
         this.getNewCoordinates();
         return super.chooseCell(character);
-    } 
+    }
     mul() {
         let emptyCells = this.chooseCell(0);
         let newCell = random(emptyCells);
@@ -38,8 +38,18 @@ module.exports = class GrassEaterEater extends LiveForm {
         }
     }
     eat() {
-        let emptyCells = this.chooseCell(2);
-        let newCell = random(emptyCells);
+        let arr;
+        let newCell;
+        if (random([1, 2]) == 1) {
+            let emptyCells = this.chooseCell(2);
+            newCell = random(emptyCells);
+            arr = 1
+        } else {
+            let emptyCells = this.chooseCell(1);
+            newCell = random(emptyCells);
+            arr = 1
+        }
+
 
         if (newCell) {
 
@@ -50,15 +60,23 @@ module.exports = class GrassEaterEater extends LiveForm {
             matrix[y][x] = 3;
             matrix[this.y][this.x] = 0;
 
-            for (let i in grassEaterArr) {
-                if (grassEaterArr[i].x == x && grassEaterArr[i].y == y) {
-                    grassEaterArr.splice(i, 1)
+            if (arr = 1) {
+                for (let i in grassEaterArr) {
+                    if (grassEaterArr[i].x == x && grassEaterArr[i].y == y) {
+                        grassEaterArr.splice(i, 1)
+                    }
+                }
+            } else {
+                for (let i in grassArr) {
+                    if (grassArr[i].x == x && grassArr[i].y == y) {
+                        grassArr.splice(i, 1)
+                    }
                 }
             }
             this.x = x;
             this.y = y;
 
-            if (this.life >= 12) {
+            if (this.life >= 17) {
                 this.mul();
             }
         }
