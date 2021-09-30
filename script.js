@@ -12,6 +12,9 @@ function setup() {
     let grassCountElement = document.getElementById('grassCount');
     let grassEaterCountElement = document.getElementById('grassEaterCount');
     let grassEaterEaterCountElement = document.getElementById('grassEaterEaterCount');
+    let fireCounterElemrnt = document.getElementById('fireCount');
+    let waterCounterElemrnt = document.getElementById('waterCount');
+
 
     //! adding socket listener on "data" <-- name, after that fire 'drawCreatures' function 
 
@@ -22,7 +25,9 @@ function setup() {
         matrix = data.matrix;
         grassCountElement.innerText = data.grassCounter;
         grassEaterCountElement.innerText = data.grassEaterCounter;  
-        grassEaterEaterCountElement.innerText = data.grassEaterEaterCounter;  
+        grassEaterEaterCountElement.innerText = data.grassEaterEaterCounter;
+        fireCounterElemrnt.innerText = data.fireCounter;
+        waterCounterElemrnt.innerText = data.waterCounter;
         //! Every time it creates new Canvas woth new matrix size
         createCanvas(matrix[0].length * side, matrix.length * side)
         //! clearing background by setting it to new grey color

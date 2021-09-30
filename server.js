@@ -4,6 +4,7 @@ var Grass = require("./modules/Grass.js");
 var GrassEater = require("./modules/GrassEater.js");
 var GrassEaterEater = require("./modules/GrassEaterEater.js");
 var Fire = require("./modules/Fire.js");
+var Water = require("./modules/Water.js");
 let random = require('./modules/random');
 //! Requiring modules  --  END
 
@@ -13,6 +14,7 @@ grassArr = [];
 grassEaterArr = [];
 grassEaterEaterArr = [];
 fireArr = [];
+waterArr = [];
 matrix = [];
 //! Setting global arrays  -- END
 
@@ -53,7 +55,7 @@ function matrixGenerator(matrixSize, grass, grassEater, grassEaterEater, waterAr
         matrix[customY][customX] = 5;
     }
 }
-matrixGenerator(20, 3, 5, 5, 0, 10);
+matrixGenerator(20, 3, 5, 5, 5, 10);
 //! Creating MATRIX -- END
 
 
@@ -87,6 +89,9 @@ function creatingObjects() {
             } else if (matrix[y][x] == 5){
                 var fire = new Fire(x, y);
                 fireArr.push(fire)
+            } else if (matrix[y][x] == 4){
+                var water = new Water(x, y);
+                waterArr.push(water)
             }
         }
     }
@@ -116,12 +121,20 @@ function game() {
         }
     }
 
+    if (waterArr[0] !== undefined) {
+        for (var i in waterArr) {
+            waterArr[i].spread();
+        }
+    }
+
     //! Object to send
     let sendData = {
         matrix: matrix,
         grassCounter: grassArr.length,
         grassEaterCounter: grassEaterArr.length,
-        grassEaterEaterCounter: grassEaterEaterArr.length
+        grassEaterEaterCounter: grassEaterEaterArr.length,
+        fireCounter: fireArr.length,
+        waterCounter: waterArr.length
     }
 
     //! Send data over the socket to clients who listens "data"

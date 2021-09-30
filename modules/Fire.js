@@ -7,20 +7,8 @@ module.exports = class Fire extends LiveForm {
         super(x, y);
         this.multiply = 0;
     }
-    getNewCoordinates() {
-        this.directions = [
-            [this.x - 1, this.y - 1],
-            [this.x, this.y - 1],
-            [this.x + 1, this.y - 1],
-            [this.x - 1, this.y],
-            [this.x + 1, this.y],
-            [this.x - 1, this.y + 1],
-            [this.x, this.y + 1],
-            [this.x + 1, this.y + 1]
-        ];
-    }
+
     chooseCell(character) {
-        this.getNewCoordinates();
         return super.chooseCell(character);
     }
     spread() {
