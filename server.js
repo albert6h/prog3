@@ -1,4 +1,3 @@
-
 //! Requiring modules  --  START
 var Grass = require("./modules/Grass.js");
 var GrassEater = require("./modules/GrassEater.js");
@@ -15,6 +14,7 @@ grassEaterArr = [];
 grassEaterEaterArr = [];
 fireArr = [];
 waterArr = [];
+manArr = [];
 matrix = [];
 //! Setting global arrays  -- END
 
@@ -22,40 +22,40 @@ matrix = [];
 
 
 //! Creating MATRIX -- START
-function matrixGenerator(matrixSize, grass, grassEater, grassEaterEater, waterArr, fireArr) {
+function matrixGenerator(matrixSize, gr, grEater, grEaterEater, wt, fr) {
     for (let i = 0; i < matrixSize; i++) {
         matrix[i] = [];
         for (let o = 0; o < matrixSize; o++) {
             matrix[i][o] = 0;
         }
     }
-    for (let i = 0; i < grass; i++) {
+    for (let i = 0; i < gr; i++) {
         let customX = Math.floor(random(matrixSize)); // 0-9
         let customY = Math.floor(random(matrixSize)); // 4
         matrix[customY][customX] = 1;
     }
-    for (let i = 0; i < grassEater; i++) {
+    for (let i = 0; i < grEater; i++) {
         let customX = Math.floor(random(matrixSize));
         let customY = Math.floor(random(matrixSize));
         matrix[customY][customX] = 2;
     }
-    for (let i = 0; i < grassEaterEater; i++) {
+    for (let i = 0; i < grEaterEater; i++) {
         let customX = Math.floor(random(matrixSize));
         let customY = Math.floor(random(matrixSize));
         matrix[customY][customX] = 3;
     }
-    for (let i = 0; i < waterArr; i++) {
+    for (let i = 0; i < wt; i++) {
         let customX = Math.floor(random(matrixSize));
         let customY = Math.floor(random(matrixSize));
         matrix[customY][customX] = 4;
     }
-    for (let i = 0; i < fireArr; i++) {
+    for (let i = 0; i < fr; i++) {
         let customX = Math.floor(random(matrixSize));
         let customY = Math.floor(random(matrixSize));
         matrix[customY][customX] = 5;
     }
 }
-matrixGenerator(20, 3, 5, 5, 5, 10);
+matrixGenerator(20, 20, 12, 5, 5, 10);
 //! Creating MATRIX -- END
 
 
@@ -97,6 +97,8 @@ function creatingObjects() {
     }
 }
 creatingObjects();
+
+let season = 0;
 
 function game() {
     if (grassArr[0] !== undefined) {

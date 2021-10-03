@@ -47,7 +47,7 @@ module.exports = class GrassEaterEater extends LiveForm {
         } else {
             let emptyCells = this.chooseCell(1);
             newCell = random(emptyCells);
-            arr = 1
+            arr = 2
         }
 
 
@@ -60,7 +60,7 @@ module.exports = class GrassEaterEater extends LiveForm {
             matrix[y][x] = 3;
             matrix[this.y][this.x] = 0;
 
-            if (arr = 1) {
+            if (arr == 1) {
                 for (let i in grassEaterArr) {
                     if (grassEaterArr[i].x == x && grassEaterArr[i].y == y) {
                         grassEaterArr.splice(i, 1)

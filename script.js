@@ -15,12 +15,34 @@ function setup() {
     let fireCounterElemrnt = document.getElementById('fireCount');
     let waterCounterElemrnt = document.getElementById('waterCount');
 
+    let seasonChanger = document.getElementById("btnsc");
+    let seasonElement = document.getElementById("SeasonLabel");
+
+    let season = 0;
+
+    let colorSystem = [
+        ["white", "orange", "red", "yellow", "cyan"],
+        ["green", "orange", "red", "yellow", "blue"],
+        ["#34eb4c", "orange", "red", "yellow", "blue"],
+        ["green", "orange", "red", "yellow", "blue"]
+
+    ];
+
+    let Seasons = ["Winter", "Spring", "Summer", "Autumn"]
+
+    seasonChanger.addEventListener("click", ()=>{
+        season += 1;
+        season %= 4;
+
+        seasonElement.innerText = "Season: " + Seasons[season];
+    });
+
 
     //! adding socket listener on "data" <-- name, after that fire 'drawCreatures' function 
 
     socket.on("data", drawCreatures);
 
-    function drawCreatures(data) {
+    function drawCreatures(data) {        
         //! after getting data pass it to matrix variable
         matrix = data.matrix;
         grassCountElement.innerText = data.grassCounter;
@@ -38,18 +60,17 @@ function setup() {
         for (var i = 0; i < matrix.length; i++) {
             for (var j = 0; j < matrix[i].length; j++) {
                 if (matrix[i][j] == 1) {
-                    fill("green");
+                    fill(colorSystem[season][0]);
                 } else if (matrix[i][j] == 2) {
-                    fill("orange");
+                    fill(colorSystem[season][1]);
                 } else if (matrix[i][j] == 0) {
                     fill('#acacac');
                 } else if (matrix[i][j] == 3) {
-                    fill('red');
-                    rect(j * side, i * side, side, side);
+                    fill(colorSystem[season][3]);
                 } else if (matrix[i][j] == 4) {
-                    fill('blue');
+                    fill(colorSystem[season][4]);
                 } else if (matrix[i][j] == 5) {
-                    fill('yellow');
+                    fill(colorSystem[season][3]);
                 }
                 rect(j * side, i * side, side, side);
             }

@@ -16,7 +16,7 @@ module.exports = class Water extends LiveForm {
         let emptyCells = this.chooseCell(0)
         let newCell = random(emptyCells);
 
-        if (this.multiply > 13) {
+        if (this.multiply > 16) {
             if (newCell) {
                 let x = newCell[0];
                 let y = newCell[1];
